@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Employee extends Model
+{
+    use HasFactory;
+
+    protected $table = 'employees';
+
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'phone_number',
+        'address',
+        'bank_name',
+        'bank_number',
+        'tax_no',
+        'payroll_id',
+        'position_id',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
+
+    public function salaries()
+    {
+        return $this->hasOne(Salary::class);
+    }
+
+    public function attendanceRecords()
+    {
+        return $this->hasMany(Attendance::class, 'employee_id');
+    }
+
+    public function overtimeRecords()
+    {
+        return $this->hasMany(Overtime::class, 'employee_id');
+    }
+
+    public function leaveRequests()
+    {
+        return $this->hasMany(Leave::class, 'employee_id');
+    }
+
+    public function employeeAllowances()
+    {
+        return $this->hasMany(EmployeeAllowance::class, 'employee_id');
+    }
+
+    public function employeeDeductions()
+    {
+        return $this->hasMany(EmployeeDeduction::class, 'employee_id');
+    }
+}
