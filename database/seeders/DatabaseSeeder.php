@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CompanySetting;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,8 +17,17 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin Pookie',
+            'email' => 'admin@rumputabdul.com',
+            'password' => bcrypt('qwertyuiop'),
+            'is_admin' => True,
+        ]);
+
+        CompanySetting::factory()->create([
+            'name' => 'PT Rumput Abdullah Jaya Abadi',
+            'description' => 'Abdullah Yasir\'s very successful feed business',
+            'address' => 'Balls st, Bollocks ave, 1298',
+            'phone' => '+62 23028398289392',
         ]);
     }
 }
