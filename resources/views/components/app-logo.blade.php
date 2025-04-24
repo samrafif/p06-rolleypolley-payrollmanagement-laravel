@@ -4,5 +4,5 @@
 <div class="ms-1 grid flex-1 text-start text-sm gap-1">
     <span class="mb-0.5 truncate leading-none font-semibold">RolleyPolley</span>
     {{-- TODO: INFO TAKE FROM DB --}}
-    <span class="mb-0.5 truncate leading-none">COMPANY_NAME</span>
+    <span class="mb-0.5 leading-none"><livewire:components.company-name/></span>
 </div>
