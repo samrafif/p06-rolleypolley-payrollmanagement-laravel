@@ -14,6 +14,21 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    {{-- TODO: Implement Routes --}}
+                    <flux:navlist.item icon="user-group" :href="`#`" :current="request()->routeIs('employees')" wire:navigate>{{ __('Employees') }}</flux:navlist.item>
+                    <flux:navlist.item icon="circle-stack" :href="`#`" :current="request()->routeIs('employees')" wire:navigate>{{ __('Payrolls') }}</flux:navlist.item>
+                    <flux:navlist.item icon="calendar-date-range" :href="`#`" :current="request()->routeIs('employees')" wire:navigate>{{ __('Time & Attendance') }}</flux:navlist.item>
+                    <flux:navlist.item icon="inbox-arrow-down" :href="`#`" :current="request()->routeIs('employees')" wire:navigate>{{ __('Leave Requests') }}</flux:navlist.item>
+                </flux:navlist.group>
+                <flux:navlist.group :heading="__('Configuration')" class="grid">
+                    {{-- TODO: Implement Routes --}}
+                    <flux:navlist.item icon="banknotes" :href="`#`" :current="request()->routeIs('none')" wire:navigate>{{ __('Salary Components') }}</flux:navlist.item>
+                    
+                    <flux:navlist.item icon="building-office-2" :href="`#`" :current="request()->routeIs('employees')" wire:navigate>{{ __('Departments & Positions') }}</flux:navlist.item>
+                    <flux:navlist.item icon="building-office" :href="route('dashboard.config.company-settings')" :current="request()->routeIs('dashboard.config.company-settings')" wire:navigate>
+                        {{ __('Company Settings') }}</flux:navlist.item>
+                    <flux:navlist.item icon="currency-dollar" :href="`#`" :current="request()->routeIs('none')" wire:navigate>{{ __('Tax Settings') }}</flux:navlist.item>
+                
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -21,11 +36,11 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                {{ __('Repository') }}
+                    Repository
                 </flux:navlist.item>
 
                 <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
-                {{ __('Documentation') }}
+                    Documentation
                 </flux:navlist.item>
             </flux:navlist>
 
