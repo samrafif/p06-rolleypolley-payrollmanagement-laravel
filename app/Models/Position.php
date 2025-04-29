@@ -15,6 +15,8 @@ class Position extends Model
         'name',
         'description',
         'department_id',
+        'shift_clock_in_time',
+        'shift_duration',
     ];
 
     public function department()

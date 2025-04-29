@@ -1,21 +1,25 @@
 <div>
-    {{-- The best athlete wants his opponent at his best. --}}
-    <flux:modal.trigger name="new-department">
-        <flux:button class="w-1/2">Add Department</flux:button>
+    <flux:modal.trigger name="edit-position-{{ $position->id }}">
+        <flux:button
+            icon:leading="pencil"
+        >
+            {{ __('Edit') }}
+        </flux:button>
     </flux:modal.trigger>
+    
 
-    <flux:modal name="new-department" class="md:w-96">
+    <flux:modal name="edit-position-{{ $position->id }}" class="md:w-96">
         <div class="space-y-6">
             <div>
-                <flux:heading size="lg">Add Department</flux:heading>
+                <flux:heading size="lg">Update Position</flux:heading>
                 <flux:text class="mt-2">Make changes to your personal details.</flux:text>
             </div>
-            <form wire:submit="newDepartment" class="space-y-4">
+            <form wire:submit="updatePosition" class="space-y-4">
                 <flux:input wire:model="name" label="Department Name" placeholder="Your name" />
                 <flux:textarea wire:model="description" label="Department Description" placeholder="Your name" />
                 <div class="flex">
                     <flux:spacer />
-                    <flux:button type="submit" variant="primary">Add new department</flux:button>
+                    <flux:button type="submit" variant="primary">Save changes</flux:button>
                 </div>
             </form>
         </div>
