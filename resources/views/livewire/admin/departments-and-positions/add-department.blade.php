@@ -1,7 +1,7 @@
 <div>
     {{-- The best athlete wants his opponent at his best. --}}
     <flux:modal.trigger name="new-department">
-        <flux:button class="w-1/2">Add Department</flux:button>
+        <flux:button class="w-1/4">Add Department</flux:button>
     </flux:modal.trigger>
 
     <flux:modal name="new-department" class="md:w-96">

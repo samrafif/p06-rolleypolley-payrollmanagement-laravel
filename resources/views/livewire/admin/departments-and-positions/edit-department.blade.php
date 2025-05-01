@@ -1,16 +1,16 @@
 <div>
-    <flux:modal.trigger name="edit-department">
+    <flux:modal.trigger name="edit-department-{{ $department->id }}">
         <flux:button
             icon:leading="pencil"
-            variant="ghost"
+            variant="{{ $variant }}"
             >
         </flux:button>
     </flux:modal.trigger>
     
 
-    <flux:modal name="edit-department" class="md:w-96">
+    <flux:modal name="edit-department-{{ $department->id }}" class="md:w-96">
         <div class="space-y-6">
-            <div>
+            <div  class="text-left">
                 <flux:heading size="lg">Update Department</flux:heading>
                 <flux:text class="mt-2">Make changes to your personal details.</flux:text>
             </div>

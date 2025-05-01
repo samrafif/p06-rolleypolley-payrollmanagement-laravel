@@ -12,6 +12,7 @@ class EditDepartment extends Component
 
     public $name;
     public $description;
+    public $variant;
 
     public function mount()
     {
@@ -39,6 +40,7 @@ class EditDepartment extends Component
     {
         return view('livewire.admin.departments-and-positions.edit-department', [
             'department' => $this->department,
+            'variant' => $this->variant,
         ]);
     }
 }

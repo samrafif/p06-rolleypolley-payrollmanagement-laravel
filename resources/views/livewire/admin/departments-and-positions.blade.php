@@ -43,8 +43,9 @@
                     @foreach ($departments as $department)
                     <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-all duration-200 animate-enter">
                         <td
+                            style="cursor:pointer" onclick="document.location.href='{{ route('dashboard.config.department-detail', $department->id) }}'"
                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-800 dark:text-slate-100 transition-colors duration-300">
-                            <span class="inline-block transition-transform duration-300 hover:translate-x-1">
+                            <span class="inline-block transition-all duration-300 hover:translate-x-1 ease-in-out hover:underline">
                                 {{ $department->name }}
                             </span>
                         </td>
@@ -65,19 +66,8 @@
                         <td
                             class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium transition-colors duration-300">
                             <div class="flex justify-end space-x-2">
-                                <flux:button
-                                    :href="route('dashboard.config.department-detail', $department->id)"
-                                    icon:leading="pencil"
-                                >
-                                    {{ __('Edit') }}
-                                </flux:button>
-                                <flux:button
-                                    :href="route('dashboard')"
-                                    icon:leading="trash"
-                                    variant="danger"
-                                >
-                                    {{ __('Delete') }}
-                                </flux:button>
+                                <livewire:admin.departments-and-positions.edit-department :variant="'filled'" :department="$department" />
+                                <livewire:admin.departments-and-positions.delete-department :department="$department" />
                             </div>
                         </td>
                     </tr>

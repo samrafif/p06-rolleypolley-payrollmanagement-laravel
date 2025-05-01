@@ -34,13 +34,13 @@ class DepartmentDetail extends Component
     public function onUpdate()
     {
         $this->department = Department::find($this->id);
+        $this->positions = $this->department->positions()->get();
     }
 
     #[On('info-new')]
     public function onNew()
     {
-        $this->department = Department::find($this->id);
-        $this->positions = $this->department->positions()->get();
+        $this->onUpdate();
     }
 
     public function render()

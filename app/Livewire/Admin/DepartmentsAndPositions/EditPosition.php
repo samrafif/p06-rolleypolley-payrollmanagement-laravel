@@ -16,6 +16,8 @@ class EditPosition extends Component
     public $department;
     public $departmentId;
     public $position;
+    public $variant;
+
 
     public function mount()
     {
@@ -47,7 +49,7 @@ class EditPosition extends Component
         ]);
 
         $this->dispatch('info-updated', name: $this->name);
-        Flux::modals()->close('edit-position');
+        Flux::modals()->close();
     }
 
     public function render()
@@ -55,6 +57,7 @@ class EditPosition extends Component
         return view('livewire.admin.departments-and-positions.edit-position', [
             'department' => $this->department,
             'position' => $this->position,
+            'variant' => $this->variant,
         ]);
     }
 }
