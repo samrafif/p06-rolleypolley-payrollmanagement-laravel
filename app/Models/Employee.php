@@ -12,17 +12,20 @@ class Employee extends Model
     protected $table = 'employees';
 
     protected $fillable = [
-        'user_id',
-        'first_name',
-        'last_name',
+        'fullname',
         'phone_number',
+        'hire_date',
         'address',
         'bank_name',
         'bank_number',
-        'tax_no',
-        'payroll_id',
+        'npwp',
         'position_id',
+        'card_id',
     ];
+    protected $casts = [
+        'hire_date' => 'datetime',
+    ];
+
 
     public function user()
     {
