@@ -10,6 +10,7 @@
 
             <flux:input wire:model="address" :label="__('Address')" type="address" required autofocus autocomplete="address" />
             <flux:input wire:model="phone" :label="__('Phone Number')" type="phone" required autofocus autocomplete="phone" />
+            <flux:input wire:model="currency_prefix" :label="__('Currency Prefix')" required autofocus />
 
             <div class="flex items-center gap-4">
                 <div class="flex items-center justify-end">

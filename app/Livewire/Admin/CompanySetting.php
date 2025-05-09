@@ -13,6 +13,7 @@ class CompanySetting extends Component
     public $description = '';
     public $address = '';
     public $phone = '';
+    public $currency_prefix = '';
 
     public function mount()
     {
@@ -22,6 +23,7 @@ class CompanySetting extends Component
         $this->description = $companySettingData->description;
         $this->address = $companySettingData->address;
         $this->phone = $companySettingData->phone;
+        $this->currency_prefix = $companySettingData->currency_prefix;
     }
 
     public function updateCompanyInformation()
@@ -31,6 +33,7 @@ class CompanySetting extends Component
             'description' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:255',
+            'currency_prefix' => 'nullable|string|max:255',
         ]);
 
         ModelsCompanySetting::where('id', $this->id)->update([
@@ -38,6 +41,7 @@ class CompanySetting extends Component
             'description' => $this->description,
             'address' => $this->address,
             'phone' => $this->phone,
+            'currency_prefix' => $this->currency_prefix,
         ]);
 
         $this->dispatch('info-updated', name: $this->id);
