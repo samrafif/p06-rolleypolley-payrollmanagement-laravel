@@ -21,22 +21,21 @@
                         {{ __('Payrolls') }}</flux:navlist.item>
                     <flux:navlist.item icon="calendar-date-range" :href="route('dashboard')" :current="request()->routeIs('employees')" wire:navigate>
                         {{ __('Time & Attendance') }}</flux:navlist.item>
-                    <flux:navlist.item icon="inbox-arrow-down" :href="route('dashboard')" :current="request()->routeIs('employees')" wire:navigate>
+                    <flux:navlist.item icon="inbox-arrow-down" :href="route('dashboard.leave-requests')" :current="request()->routeIs('dashboard.config.leave-requests')" wire:navigate>
                         {{ __('Leave Requests') }}</flux:navlist.item>
                 </flux:navlist.group>
                 <flux:navlist.group :heading="__('Configuration')" class="grid">
                     {{-- TODO: Implement Routes --}}
-                    <flux:navlist.item icon="banknotes" :href="route('dashboard')" :current="request()->routeIs('none')" wire:navigate>
-                        {{ __('Salary Components') }}</flux:navlist.item>
-                    <flux:navlist.item icon="building-office-2" :href="route('dashboard.config.departments-and-positions')" :current="request()->routeIs('dashboard.config.departments-and-positions')" wire:navigate>
-                        {{ __('Departments & Position') }}</flux:navlist.item>
-                    <flux:navlist.item icon="user-group" :href="route('dashboard.config.departments-and-positions')" :current="request()->routeIs('dashboard.config.departments-and-positions')" wire:navigate>
-                        {{ __('Employees') }}</flux:navlist.item>
                     <flux:navlist.item icon="building-office" :href="route('dashboard.config.company-settings')" :current="request()->routeIs('dashboard.config.company-settings')" wire:navigate>
                         {{ __('Company Settings') }}</flux:navlist.item>
-                    <flux:navlist.item icon="currency-dollar" :href="route('dashboard')" :current="request()->routeIs('none')" wire:navigate>
+                    <flux:navlist.item icon="building-office-2" :href="route('dashboard.config.departments-and-positions')" :current="request()->routeIs('dashboard.config.departments-and-positions')" wire:navigate>
+                        {{ __('Departments & Position') }}</flux:navlist.item>
+                    <flux:navlist.item icon="user" :href="route('dashboard.config.manage-users')" :current="request()->routeIs('dashboard.config.manage-users')" wire:navigate>
+                        {{ __('Users') }}</flux:navlist.item>
+                    <flux:navlist.item icon="chart-pie" :href="route('dashboard.config.tax-settings')" :current="request()->routeIs('none')" wire:navigate>
                         {{ __('Tax Settings') }}</flux:navlist.item>
-                
+                    <flux:navlist.item icon="banknotes" :href="route('dashboard.config.salary-components')" :current="request()->routeIs('dashboard.config.salary-components')" wire:navigate>
+                        {{ __('Salary Components') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

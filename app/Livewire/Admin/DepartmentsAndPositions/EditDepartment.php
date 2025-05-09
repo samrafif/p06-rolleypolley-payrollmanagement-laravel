@@ -33,7 +33,7 @@ class EditDepartment extends Component
         ]);
 
         $this->dispatch('info-updated', name: $this->department->name);
-        Flux::modals()->close('edit-department');
+        Flux::modals()->close();
     }
 
     public function render()

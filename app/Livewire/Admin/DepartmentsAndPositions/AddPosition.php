@@ -43,13 +43,7 @@ class AddPosition extends Component
         $this->dispatch('info-new', name: $this->name);
         Flux::modals()->close('new-position');
 
-        $this->name = '';
-        $this->description = '';
-        $this->clockInTime = '';
-        $this->shiftDuration = '';
-
-        // Just to be safe
-        $this->departmentId = '';
+        $this->reset();
     }
 
     public function render()

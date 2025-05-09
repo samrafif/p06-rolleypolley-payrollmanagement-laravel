@@ -15,6 +15,13 @@ class DepartmentsAndPositions extends Component
     {
         // get all depts 
         $this->departments = Department::all();
+
+        foreach ($this->departments as $department) {
+            $department->headcount = 0;
+            foreach ($department->positions as $position) {
+                $department->headcount += $position->employees()->count();
+            }
+        }
     }
 
     #[On('info-updated')]

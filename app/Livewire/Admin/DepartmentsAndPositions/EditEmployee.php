@@ -2,7 +2,11 @@
 
 namespace App\Livewire\Admin\DepartmentsAndPositions;
 
+use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Payroll;
+use App\Models\Position;
+use DateTime;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -12,10 +16,11 @@ class EditEmployee extends Component
 
     public $department;
     public $position;
+    public $departments;
     public $employee;
     public $variant;
+    public $payrolls;
 
-    public $user_id;
     public $fullname;
     public $phone_number;
     public $address;
@@ -24,6 +29,7 @@ class EditEmployee extends Component
     public $tax_no;
     public $card_id;
     public $payroll_id;
+    public $hire_date;
     public $position_id;
     public $department_id; // if needed, prolly not
 
@@ -32,7 +38,9 @@ class EditEmployee extends Component
         // get department by id
         $this->department_id = $this->department->id;
         $this->position_id = $this->position->id;
-        $this->user_id = Auth::id(); // Assuming the user is logged in
+
+        $this->payrolls = Payroll::all();
+        $this->departments = Department::all();
 
         if ($this->employee) {
             $this->fullname = $this->employee->fullname;
@@ -42,8 +50,12 @@ class EditEmployee extends Component
             $this->bank_number = $this->employee->bank_number;
             $this->tax_no = $this->employee->npwp;
             $this->payroll_id = $this->employee->payroll_id;
+            $this->hire_date = (new DateTime($this->employee->hire_date))->format("Y-m-d"); // https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/date#:~:text=to%20the%20format-,yyyy%2Dmm%2Ddd,-.
             $this->card_id = $this->employee->card_id;
         }
+
+        error_log("KONTOL");
+        error_log($this->hire_date);
     }
 
     public function updateEmployee()
@@ -69,6 +81,8 @@ class EditEmployee extends Component
             'npwp' => $this->tax_no,
             'payroll_id' => $this->payroll_id,
             'card_id' => $this->card_id,
+            'hire_date' => $this->hire_date,
+            'position_id' => $this->position_id,
         ]);
 
         $this->dispatch('info-updated', name: $this->fullname);

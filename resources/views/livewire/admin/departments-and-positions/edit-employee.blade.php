@@ -56,11 +56,27 @@
                     type="hidden" 
                     wire:model="user_id"  />
 
-                {{-- TODO: Make to be dropdown pick from existing payrolls --}}
                 <flux:input 
-                    type="hidden" 
-                    wire:model="payroll_id" 
-                    placeholder="e.g. PR12345" />
+                    wire:model="hire_date"
+                    label="Hire Date"
+                    type="date" />
+
+                <flux:select wire:model="payroll_id" label="Payroll" placeholder="Select a payroll">
+                    <option value="">Select a payroll</option>
+                    @foreach ($payrolls as $payroll)
+                        <option value="{{ $payroll->id }}">{{ $payroll->name }}</option>
+                    @endforeach
+                </flux:select>
+
+                <flux:select wire:model="position_id" label="Position (can move between departments)" placeholder="Select a position">
+                    <option value="">Select a position</option>
+                    @foreach ($departments as $department)
+                        <option disabled class="font-bold" value="{{ $department->id }}">{{ strtoupper($department->name) }}</option>
+                        @foreach ($department->positions as $position)
+                            <option value="{{ $position->id }}">- {{ $position->name }}</option>
+                        @endforeach
+                    @endforeach
+                </flux:select>
 
                 <div class="flex">
                     <flux:spacer />

@@ -28,8 +28,7 @@ class AddDepartment extends Component
         $this->dispatch('info-updated', name: $this->name);
         Flux::modals()->close('new-department');
 
-        $this->name = '';
-        $this->description = '';
+        $this->reset();
     }
 
     public function render()

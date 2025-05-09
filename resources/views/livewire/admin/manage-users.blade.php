@@ -1,10 +1,10 @@
 <div>
     <!-- Animated Page Heading -->
-    <x-page-heading pageHeading="Departments and Positions" pageDesc="Manage your organizational structure"></x-page-heading>
+    <x-page-heading pageHeading="Manage Users" pageDesc="Manage your users"></x-page-heading>
 
     {{-- Make action bar layout --}}
     <div class="my-4">
-        <livewire:admin.departments-and-positions.add-department />
+        <livewire:admin.manage-users.add-user />
     </div>
     <div
         class="bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-200 dark:border-slate-700 overflow-hidden">
@@ -15,37 +15,41 @@
                     <tr>
                         <th
                             class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider transition-colors duration-300">
-                            {{ __('Department') }}
+                            {{ __('Username') }}
                         </th>
                         <th
                             class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider transition-colors duration-300">
-                            {{ __('Description') }}
+                            {{ __('Email') }}
                         </th>
                         <th
                             class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider transition-colors duration-300">
-                            {{ __('Headcount') }}
+                            {{ __('Is Admin') }}
                         </th>
                         <th
-                            class="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider transition-colors duration-300">
+                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider transition-colors duration-300">
+                            {{ __('Associated Employee ID') }}
+                        </th>
+                        <th
+                        class="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-300 uppercase tracking-wider transition-colors duration-300">
                             {{ __('Actions') }}
                         </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
                     <!-- Table Row with enter animation -->
-                    @foreach ($departments as $department)
+                    @foreach ($users as $user)
                     <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-all duration-200 animate-enter">
                         <td
-                            style="cursor:pointer" onclick="document.location.href='{{ route('dashboard.config.department-detail', $department->id) }}'"
+                            style="cursor:pointer" onclick="document.location.href='{{ ($user->employee) ? route('dashboard.config.position-detail', [$user->employee->position->department->id, $user->employee->position->id]) : route('dashboard') }}'"
                             class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-800 dark:text-slate-100 transition-colors duration-300">
                             <span class="inline-block transition-all duration-300 hover:translate-x-1 ease-in-out hover:underline">
-                                {{ $department->name }}
+                                {{ $user->name }}
                             </span>
                         </td>
                         <td
                             class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300 transition-colors duration-300 w-1/3">
                             <span class="inline-block transition-transform duration-300 hover:translate-x-1 text-pretty">
-                                {{ $department->description }}
+                                {{ $user->email }}
                             </span>
                             
                         </td>
@@ -53,14 +57,22 @@
                             class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300 transition-colors duration-300">
                             <span class="inline-block transition-transform duration-300 hover:translate-x-1">
                                 {{-- Calculate from length of positions array --}}
-                                {{ $department->headcount }}
+                                {{ $user->is_admin ? 'Yes' : 'No' }}
+                            </span>
+                        </td>
+                        <td
+                        style="cursor:pointer" onclick="document.location.href='{{ ($user->employee) ? route('dashboard.config.position-detail', [$user->employee->position->department->id, $user->employee->position->id]) : route('dashboard.config.manage-users') }}'"
+                        class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300 transition-colors duration-300">
+                            <span class="inline-block transition-transform duration-300 hover:translate-x-1">
+                                {{-- Calculate from length of positions array --}}
+                                {{ $user->employee_id ? $user->employee_id : 'N/A' }}
                             </span>
                         </td>
                         <td
                             class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium transition-colors duration-300">
                             <div class="flex justify-end space-x-2">
-                                <livewire:admin.departments-and-positions.edit-department :variant="'filled'" :department="$department" />
-                                <livewire:admin.departments-and-positions.delete-department :department="$department" />
+                                <livewire:admin.manage-users.edit-user :user="$user" />
+                                <livewire:admin.manage-users.delete-user :user="$user" />                                
                             </div>
                         </td>
                     </tr>

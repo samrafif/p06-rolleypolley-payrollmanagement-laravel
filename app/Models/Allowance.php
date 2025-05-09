@@ -13,13 +13,14 @@ class Allowance extends Model
 
     protected $fillable = [
         // 'employee_id',
+        'name',
         'description',
         'amount',
+        'rule'
     ];
 
     public function employeeAllowances()
     {
         return $this->hasMany(EmployeeAllowance::class, 'employee_id');
     }
-
 }

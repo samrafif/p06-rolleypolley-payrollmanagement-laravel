@@ -29,6 +29,7 @@ class AddEmployee extends Component
     public $tax_no;
     public $card_id;
     public $payroll_id;
+    public $hire_date;
     public $position_id;
     public $department_id; // if needed, prolly not
 
@@ -51,10 +52,11 @@ class AddEmployee extends Component
             'phone_number'  => 'nullable|string|max:20',
             'address'       => 'nullable|string|max:255',
             'bank_name'     => 'nullable|string|max:100',
-            'bank_number'   => 'nullable|string|max:30',
-            'tax_no'        => 'nullable|string|max:30',
+            'bank_number'   => 'nullable|string',
+            'tax_no'        => 'nullable|string',
             'payroll_id'    => 'nullable|string|max:30',
             'position_id'   => 'required|exists:positions,id',
+            'hire_date'     => 'required'
         ]);
 
         Employee::create([
@@ -66,14 +68,19 @@ class AddEmployee extends Component
             'npwp'       => $this->tax_no,
             'payroll_id'   => $this->payroll_id,
             'position_id'  => $this->position_id,
-            'hire_date' => now(), // TODO: Change!!!!
+            'hire_date' => $this->hire_date,
             'card_id' => $this->card_id,
         ]);
 
-        $this->dispatch('info-new', name: $this->first_name . ' ' . $this->last_name);
+        $this->dispatch('info-new', name: $this->fullname);
         Flux::modals()->close('new-employee');
 
-        $this->reset();
+        $this->resetExcept([
+            'department',
+            'position',
+            'payrolls',
+            'users'
+        ]);
     }
 
     public function render()

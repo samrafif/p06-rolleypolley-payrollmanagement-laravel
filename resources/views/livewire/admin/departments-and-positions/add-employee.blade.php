@@ -14,7 +14,7 @@
             <form wire:submit="newEmployee" class="space-y-4">
 
                 <flux:input 
-                    wire:model="fullname" 
+                    wire:model="fullname"
                     label="Full Name" 
                     placeholder="Full name" />
 
@@ -47,18 +47,18 @@
                     wire:model="card_id" 
                     label="ID Card number" 
                     placeholder="e.g. 1234567890" />
-
-                {{-- Hidden fields --}}
-                {{-- TODO: Make to be dropdown pick from existing users --}}
+                
                 <flux:input 
-                    type="hidden" 
-                    wire:model="user_id"  />
+                    wire:model="hire_date" 
+                    label="Hire Date" 
+                    type="date" />
 
-                {{-- TODO: Make to be dropdown pick from existing payrolls --}}
-                <flux:input 
-                    type="hidden" 
-                    wire:model="payroll_id" 
-                    placeholder="e.g. PR12345" />
+                <flux:select wire:model="payroll_id" label="Payroll" placeholder="Select a payroll">
+                    <option value="">Select a payroll</option>
+                    @foreach ($payrolls as $payroll)
+                        <option value="{{ $payroll->id }}">{{ $payroll->name }}</option>
+                    @endforeach
+                </flux:select>
 
                 <div class="flex">
                     <flux:spacer />
