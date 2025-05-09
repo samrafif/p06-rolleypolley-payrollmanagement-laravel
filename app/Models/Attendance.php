@@ -9,14 +9,20 @@ class Attendance extends Model
 {
     use HasFactory;
 
-    protected $table = 'attendance';
+    protected $table = 'attendances';
 
     protected $fillable = [
         'employee_id',
         'attendance_date',
-        'clock_in',
-        'clock_out',
+        'check_in',
+        'check_out',
         'notes',
+    ];
+
+    protected $casts = [
+        // Treat 'start_time' as a Carbon instance with only time
+        'check_in' => 'datetime:H:i:s',
+        'check_out' => 'datetime:H:i:s',
     ];
 
     public function employee()
