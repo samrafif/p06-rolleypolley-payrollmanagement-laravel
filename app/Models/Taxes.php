@@ -13,8 +13,10 @@ class Taxes extends Model
 
     protected $fillable = [
         // 'employee_id',
-        'tax_name',
+        'name',
+        'description',
         'rate',
+        'threshold_range',
     ];
 
     // public function employee()

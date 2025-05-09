@@ -6,13 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::table('allowances', function (Blueprint $table) {
-            $table->decimal('rule', 15, 2);;   // Could be text/JSON if needed
+        Schema::table('deductions', function (Blueprint $table) {
+            $table->string('rule');  // Could be text/JSON if needed
         });
     }
 
@@ -21,7 +18,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('allowances', function (Blueprint $table) {
+        Schema::table('deductions', function (Blueprint $table) {
             $table->dropColumn('rule');
         });
     }

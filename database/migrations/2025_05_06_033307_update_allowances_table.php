@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('taxes', function (Blueprint $table) {
-            $table->string('threshold_range');
+        Schema::table('allowances', function (Blueprint $table) {
+            $table->string('rule');   // Could be text/JSON if needed
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('taxes', function (Blueprint $table) {
-            $table->dropColumn('threshold_range');
+        Schema::table('allowances', function (Blueprint $table) {
+            $table->dropColumn('rule');
         });
     }
 };
