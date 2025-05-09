@@ -1,6 +1,8 @@
 <?php
 
 use App\Livewire\Employee\AttendanceClocker;
+use App\Livewire\LeaveRequestForm;
+use App\Livewire\LeaveRequests;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -16,6 +18,8 @@ Route::view('dashboard', 'dashboard')
 
 Route::middleware(['auth'])->group(function () {
     Route::get('attendance', AttendanceClocker::class)->name('employee.attendance-clock');
+    Route::get('new-leave-request', LeaveRequestForm::class)->name('employee.new-leave-request');
+    Route::get('leave-request', LeaveRequests::class)->name('employee.leave-request');
 
     Route::redirect('settings', 'settings/profile');
 
