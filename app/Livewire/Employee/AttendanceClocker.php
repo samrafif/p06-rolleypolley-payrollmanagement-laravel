@@ -14,6 +14,7 @@ class AttendanceClocker extends Component
 {
 
     public $type; // Enum [check-in, check-out, overtime-check-in, overtime-check-out]
+    private $lateThreshold = 15 * 60; // seconds
 
     public function mount()
     {
@@ -67,15 +68,33 @@ class AttendanceClocker extends Component
 
             //  check if employee late or early
             $delta = strtotime($this->now()->format('H:i:s')) - strtotime($employee->position->shift_clock_in_time);
-            error_log('Delta: ' . ($delta > 0 ? '+' : '-') . date('H:i:s', abs($delta)));
-            error_log('Delta: ' . $delta);
+            error_log('Delta: ' . ($delta > 0 ? '+' : '-') . date('H_i_s', abs($delta)));
+
+            // check if employee is late
+            $notes = null;
+
+            if ($delta > $this->lateThreshold) {
+                // employee is late
+                $notes = 'late:' . date('H_i_s', abs($delta));
+                error_log('Employee is LATE: ' . $notes);
+            } elseif ($delta < 0) {
+                // employee is early
+                $notes = 'early:' . date('H_i_s', abs($delta));
+                error_log('Employee is EARLY: ' . $notes);
+            }
+
+            // check if employee is overtime
+            if (str_contains($this->type, 'overtime')) {
+                $notes = ($notes) ? $notes . ',overtime' : 'overtime';
+                error_log('Employee is OVERTIME: ' . $notes);
+            }
 
             // NOTE: Whoops baru tahu bisa gitu wok, lol whatevs, codesmell udah like shit
             $attendance = $employee->attendanceRecords()->create([
                 'check_in' => $this->now(),
                 'check_out' => null,
                 'attendance_date' => $this->now()->format('Y-m-d'),
-                'notes' => (str_contains($this->type, 'overtime')) ? 'overtime' : null,
+                'notes' => $notes, // notes, comma delimited list of flags, such as [overtime, late-check-in, late-check-out, ...]
             ]);
         }
 

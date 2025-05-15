@@ -21,7 +21,7 @@
                     Check Out </br> <i class="font-regular">Overtime</i>
                 </button>
             </div>
-            <flux:button x-on:click="$wire.clockInOut('EBC3C630')">DUMMY ATTENDANCE</flux:button>
+            {{-- <flux:button x-on:click="$wire.clockInOut('EBC3C630')">DUMMY ATTENDANCE</flux:button> --}}
         </div>
 
         <div id="thing" class="p-8 rounded-md flex flex-col shadow-md outline-[0.5px] items-center justify-center w-64">

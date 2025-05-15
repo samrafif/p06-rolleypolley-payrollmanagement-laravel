@@ -16,7 +16,7 @@ class Attendance extends Model
         'attendance_date',
         'check_in',
         'check_out',
-        'notes',
+        'notes', // Comma delimited list of flags with values e.g. 'late:15M,overtime:2H'
     ];
 
     protected $casts = [
