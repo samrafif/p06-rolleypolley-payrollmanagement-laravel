@@ -14,12 +14,11 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    {{-- TODO: Implement Routes --}}
-                    <flux:navlist.item icon="user-group" :href="route('dashboard')" :current="request()->routeIs('employees')" wire:navigate>
+                    <flux:navlist.item icon="user-group" :href="route('dashboard.manage-employees')" :current="request()->routeIs('dashboard.manage-employees')" wire:navigate>
                         {{ __('Employees') }}</flux:navlist.item>
-                    <flux:navlist.item icon="circle-stack" :href="route('dashboard')" :current="request()->routeIs('employees')" wire:navigate>
+                    <flux:navlist.item icon="circle-stack" :href="route('dashboard.payrolls')" :current="request()->routeIs('dashboard.payrolls')" wire:navigate>
                         {{ __('Payrolls') }}</flux:navlist.item>
-                    <flux:navlist.item icon="calendar-date-range" :href="route('dashboard')" :current="request()->routeIs('employees')" wire:navigate>
+                    <flux:navlist.item icon="calendar-date-range" :href="route('dashboard.time-attendance')" :current="request()->routeIs('dashboard.time-attendance')" wire:navigate>
                         {{ __('Time & Attendance') }}</flux:navlist.item>
                     <flux:navlist.item icon="inbox-arrow-down" :href="route('dashboard.leave-requests')" :current="request()->routeIs('dashboard.config.leave-requests')" wire:navigate>
                         {{ __('Leave Requests') }}</flux:navlist.item>

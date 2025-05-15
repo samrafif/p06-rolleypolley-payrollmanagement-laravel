@@ -1,13 +1,18 @@
 <?php
 
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Livewire\Admin\Attendance;
+use App\Livewire\Admin\Attendance\DateDetail;
 use App\Livewire\Admin\CompanySetting;
 use App\Livewire\Admin\DepartmentsAndPositions;
 use App\Livewire\Admin\DepartmentsAndPositions\DepartmentDetail;
 use App\Livewire\Admin\DepartmentsAndPositions\PositionDetail;
+use App\Livewire\Admin\EmployeeCreationWizard;
 use App\Livewire\Admin\EmployeeDetail;
+use App\Livewire\Admin\Employees;
 use App\Livewire\Admin\LeaveRequests;
 use App\Livewire\Admin\ManageUsers;
+use App\Livewire\Admin\Payrolls;
 use App\Livewire\Admin\SalaryComponents;
 use App\Livewire\Admin\TaxSettings;
 use Illuminate\Support\Facades\Route;
@@ -26,5 +31,10 @@ Route::middleware(['auth', 'admin'])->name('dashboard')->group(function () {
     Route::get('dashboard/manage-salary-components', SalaryComponents::class)->name('.config.salary-components');
     Route::get('dashboard/manage-users', ManageUsers::class)->name('.config.manage-users');
 
+    Route::get('dashboard/manage-employees', Employees::class)->name('.manage-employees');
+    Route::get('dashboard/employee-create-wizard', EmployeeCreationWizard::class)->name('.employee-create-wizard');
     Route::get('dashboard/leave-requests', LeaveRequests::class)->name('.leave-requests');
+    Route::get('dashboard/time-attendance', Attendance::class)->name('.time-attendance');
+    Route::get('dashboard/time-attendance/{date}', DateDetail::class)->name('.time-attendance.date-detail');
+    Route::get('dashboard/payrolls', Payrolls::class)->name('.payrolls');
 });
