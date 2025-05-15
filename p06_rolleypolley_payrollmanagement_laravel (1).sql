@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 12, 2025 at 06:58 AM
+-- Generation Time: May 15, 2025 at 01:59 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -53,6 +53,20 @@ CREATE TABLE `attendances` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attendances`
+--
+
+INSERT INTO `attendances` (`id`, `employee_id`, `attendance_date`, `check_in`, `check_out`, `notes`, `created_at`, `updated_at`) VALUES
+(1, 1, '2025-05-14', '14:46:34', '20:52:34', NULL, '2025-05-14 00:46:34', '2025-05-14 00:46:34'),
+(3, 3, '2025-05-15', '08:43:58', '16:52:57', NULL, NULL, NULL),
+(4, 1, '2025-05-13', '07:32:46', '17:32:46', NULL, '2025-05-15 04:32:46', '2025-05-15 04:32:46'),
+(5, 2, '2025-05-09', '09:32:46', '17:32:46', NULL, '2025-05-15 04:32:46', '2025-05-15 04:32:46'),
+(6, 3, '2025-05-01', '07:35:04', '17:35:04', NULL, '2025-05-15 04:35:04', '2025-05-15 04:35:04'),
+(7, 3, '2025-05-13', '09:35:04', '16:35:04', NULL, '2025-05-15 04:35:04', '2025-05-15 04:35:04'),
+(8, 1, '2025-05-15', '13:05:33', '13:23:58', 'late:04_35_33', '2025-05-14 23:05:33', '2025-05-14 23:23:58'),
+(9, 2, '2025-05-15', '13:24:04', '13:28:35', 'late:04_54_04', '2025-05-14 23:24:04', '2025-05-14 23:28:35');
 
 -- --------------------------------------------------------
 
@@ -169,9 +183,9 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `fullname`, `phone_number`, `hire_date`, `address`, `bank_name`, `bank_number`, `npwp`, `created_at`, `updated_at`, `position_id`, `card_id`) VALUES
-(1, 'Abrisam Rafif Maulana', '+6281281091461', '2025-04-07', 'Lippo Cikarang', 'Bank of Indonesia', '983247843', '12-23894TE', '2025-05-11 19:45:58', '2025-05-11 19:45:58', 1, '0000000000000'),
-(2, 'Jane Doe', '0000000000000', '2025-03-13', 'Null', 'Ethereum Central', '0x71C7656EC7ab88b098defB751B7401B5f6d8976F', '12-23894NTE', '2025-05-11 19:47:20', '2025-05-11 19:47:20', 4, '00000000'),
-(3, 'Von Lycaon', '0000000000000', '2025-04-15', 'New Eridu', 'Central Bank of New Eridu', '2934786233', '12-23894NTE', '2025-05-11 19:48:21', '2025-05-11 19:48:21', 5, '00000000');
+(1, 'Abrisam Rafif Maulana', '+6281281091461', '2025-04-07', 'Lippo Cikarang', 'Bank of Indonesia', '983247843', '12-23894TE', '2025-05-11 19:45:58', '2025-05-14 00:46:16', 1, 'EBC3C630'),
+(2, 'Jane Doe', '0000000000000', '2025-03-13', 'Null', 'Ethereum Central', '0x71C7656EC7ab88b098defB751B7401B5f6d8976F', '12-23894NTE', '2025-05-11 19:47:20', '2025-05-14 23:18:53', 4, 'F9578B9D'),
+(3, 'Von Lycaon', '0000000000000', '2025-04-15', 'New Eridu', 'Central Bank of New Eridu', '2934786233', '12-23894NTE', '2025-05-11 19:48:21', '2025-05-14 23:18:36', 5, '63AE7004');
 
 -- --------------------------------------------------------
 
@@ -316,7 +330,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2025_05_06_033307_update_allowances_table', 1),
 (24, '2025_05_06_062338_update_deductions_table', 1),
 (25, '2025_05_06_073229_update_taxes_table', 1),
-(26, '2025_05_07_132512_update_company_settings_table', 1);
+(26, '2025_05_07_132512_update_company_settings_table', 1),
+(27, '2025_05_13_021241_create_ran_payrolls_table', 2),
+(28, '2025_05_13_021606_update_payroll_details_table', 2);
 
 -- --------------------------------------------------------
 
@@ -356,13 +372,20 @@ CREATE TABLE `password_reset_tokens` (
 
 CREATE TABLE `payrolls` (
   `id` bigint UNSIGNED NOT NULL,
-  `payroll_period_start` date NOT NULL,
-  `payroll_period_end` date NOT NULL,
+  `payroll_period_start` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payroll_period_end` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `payment_date` date DEFAULT NULL,
   `notes` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payrolls`
+--
+
+INSERT INTO `payrolls` (`id`, `payroll_period_start`, `payroll_period_end`, `payment_date`, `notes`, `created_at`, `updated_at`) VALUES
+(1, '20', '28', NULL, 'I Don\'t Know', '2025-05-12 18:51:46', '2025-05-12 18:51:46');
 
 -- --------------------------------------------------------
 
@@ -383,7 +406,8 @@ CREATE TABLE `payrolls_details` (
   `payment_references` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `ran_payroll_id` bigint UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -413,6 +437,19 @@ INSERT INTO `positions` (`id`, `name`, `description`, `shift_clock_in_time`, `sh
 (3, 'Research Assistant', NULL, '07:00', 7, 1, '2025-05-11 19:44:20', '2025-05-11 19:44:20'),
 (4, 'Head of Security', NULL, '08:30', 7, 2, '2025-05-11 19:44:44', '2025-05-11 19:44:44'),
 (5, 'Head of Safety', NULL, '08:30', 7, 2, '2025-05-11 19:44:57', '2025-05-11 19:44:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ran_payrolls`
+--
+
+CREATE TABLE `ran_payrolls` (
+  `id` bigint UNSIGNED NOT NULL,
+  `payroll_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -450,8 +487,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('1TtxLC2B5f0OeXIhi6Kws6bx9m5NIQ2RR67tmWPx', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTmx6akhlWUp1MVhQdk9NNWFhWGFjQmF4WTBSOEVhV2pXNFZNc2lEdSI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0ODoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2Rhc2hib2FyZC9tYW5hZ2UtZW1wbG95ZWVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1747032918),
-('GQDEdCCCBrnAujkgIToKHdHOc77hjMPtCefrQT96', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoieTlrbGpzUnZYZUZFNkpROTdtV3VYSVJuWTh1MXhLQmQ5ZVBQbFJlUCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NDoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2Rhc2hib2FyZC9tYW5hZ2UtdXNlcnMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1747031027);
+('Copi72uHUKLe79cpM77H1NDzdDxVMoh0ypbSfgEY', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUmFablRnN3c3T1NoTkkzaEl6VXRQSkE2emhDTkZOVWljQ0VMbzdyViI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NzoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2Rhc2hib2FyZC90aW1lLWF0dGVuZGFuY2UiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1747295321);
 
 -- --------------------------------------------------------
 
@@ -629,7 +665,8 @@ ALTER TABLE `payrolls`
 ALTER TABLE `payrolls_details`
   ADD PRIMARY KEY (`id`),
   ADD KEY `payrolls_details_payroll_id_foreign` (`payroll_id`),
-  ADD KEY `payrolls_details_employee_id_foreign` (`employee_id`);
+  ADD KEY `payrolls_details_employee_id_foreign` (`employee_id`),
+  ADD KEY `payrolls_details_ran_payroll_id_foreign` (`ran_payroll_id`);
 
 --
 -- Indexes for table `positions`
@@ -637,6 +674,13 @@ ALTER TABLE `payrolls_details`
 ALTER TABLE `positions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `positions_department_id_foreign` (`department_id`);
+
+--
+-- Indexes for table `ran_payrolls`
+--
+ALTER TABLE `ran_payrolls`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ran_payrolls_payroll_id_foreign` (`payroll_id`);
 
 --
 -- Indexes for table `salaries`
@@ -682,7 +726,7 @@ ALTER TABLE `allowances`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `company_settings`
@@ -742,7 +786,7 @@ ALTER TABLE `leaves`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `overtimes`
@@ -754,7 +798,7 @@ ALTER TABLE `overtimes`
 -- AUTO_INCREMENT for table `payrolls`
 --
 ALTER TABLE `payrolls`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `payrolls_details`
@@ -767,6 +811,12 @@ ALTER TABLE `payrolls_details`
 --
 ALTER TABLE `positions`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `ran_payrolls`
+--
+ALTER TABLE `ran_payrolls`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `salaries`
@@ -833,13 +883,20 @@ ALTER TABLE `overtimes`
 --
 ALTER TABLE `payrolls_details`
   ADD CONSTRAINT `payrolls_details_employee_id_foreign` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `payrolls_details_payroll_id_foreign` FOREIGN KEY (`payroll_id`) REFERENCES `payrolls` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `payrolls_details_payroll_id_foreign` FOREIGN KEY (`payroll_id`) REFERENCES `payrolls` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `payrolls_details_ran_payroll_id_foreign` FOREIGN KEY (`ran_payroll_id`) REFERENCES `ran_payrolls` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `positions`
 --
 ALTER TABLE `positions`
   ADD CONSTRAINT `positions_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `ran_payrolls`
+--
+ALTER TABLE `ran_payrolls`
+  ADD CONSTRAINT `ran_payrolls_payroll_id_foreign` FOREIGN KEY (`payroll_id`) REFERENCES `payrolls` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `salaries`
