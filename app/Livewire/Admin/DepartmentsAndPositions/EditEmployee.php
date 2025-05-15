@@ -53,9 +53,6 @@ class EditEmployee extends Component
             $this->hire_date = (new DateTime($this->employee->hire_date))->format("Y-m-d"); // https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/date#:~:text=to%20the%20format-,yyyy%2Dmm%2Ddd,-.
             $this->card_id = $this->employee->card_id;
         }
-
-        error_log("KONTOL");
-        error_log($this->hire_date);
     }
 
     public function updateEmployee()

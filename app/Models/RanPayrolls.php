@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payroll extends Model
+class RanPayrolls extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'payroll_period_start',
-        'payroll_period_end',
-        'payment_date',
-        'notes',
+        'payroll_id',
     ];
 
     public function details()
@@ -21,8 +18,8 @@ class Payroll extends Model
         return $this->hasMany(PayrollDetail::class);
     }
 
-    public function ranPayroll()
+    public function payroll()
     {
-        return $this->hasMany(RanPayrolls::class);
+        return $this->belongsTo(Payroll::class);
     }
 }

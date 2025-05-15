@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payrolls', function (Blueprint $table) {
+        Schema::create('ran_payrolls', function (Blueprint $table) {
             $table->id();
-            $table->string('payroll_period_start');
-            $table->string('payroll_period_end');
-            $table->date('payment_date')->nullable();
-            $table->text('notes')->nullable();
+            // reference payrolls table
+            $table->foreignId('payroll_id')->constrained('payrolls')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payrolls');
+        Schema::dropIfExists('ran_payrolls');
     }
 };
