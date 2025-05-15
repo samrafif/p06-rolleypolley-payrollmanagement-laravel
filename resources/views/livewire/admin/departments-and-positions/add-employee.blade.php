@@ -4,7 +4,7 @@
         <flux:button class="w-1/4">Add Employee</flux:button>
     </flux:modal.trigger>
 
-    <flux:modal name="new-employee" class="md:w-96">
+    <flux:modal name="new-employee" class="md:w-256">
         <div class="space-y-6">
             <div>
                 <flux:heading size="lg">Add Employee</flux:heading>
@@ -13,6 +13,7 @@
 
             <form wire:submit="newEmployee" class="space-y-4">
 
+                <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
                 <flux:input 
                     wire:model="fullname"
                     label="Full Name" 
@@ -52,11 +53,13 @@
                     wire:model="hire_date" 
                     label="Hire Date" 
                     type="date" />
+                
+                </div>
 
                 <flux:select wire:model="payroll_id" label="Payroll" placeholder="Select a payroll">
                     <option value="">Select a payroll</option>
                     @foreach ($payrolls as $payroll)
-                        <option value="{{ $payroll->id }}">{{ $payroll->name }}</option>
+                        <option value="{{ $payroll->id }}">{{ $payroll->payroll_period_start }}-{{ $payroll->payroll_period_end }}</option>
                     @endforeach
                 </flux:select>
 
