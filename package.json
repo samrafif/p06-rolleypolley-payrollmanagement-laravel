@@ -12,7 +12,7 @@
         "chart.js": "^4.4.9",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.0",
-        "tailwindcss": "^4.0.7",
+        "tailwindcss": "^4.1.4",
         "vite": "^6.0"
     },
     "optionalDependencies": {
